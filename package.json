@@ -1,0 +1,11 @@
+{
+  "name": "react-logic",
+  "version": "1.0.0",
+  "description": "React Component to display a classic grid-based logic puzzle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
