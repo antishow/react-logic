@@ -1,0 +1,167 @@
+:root {
+  --puzzle--font-size: 14px;
+  --puzzle--clue-size: 14px;
+  --puzzle--mark-size: 16px;
+  --puzzle--void-size: 80px;
+  --puzzle--grid-size: 20px;
+  --puzzle--padding-size: calc(0.5 * (var(--puzzle--grid-size) - var(--puzzle--font-size)));
+  --puzzle--text-color: #000;
+  --puzzle--border-color: #000;
+  --puzzle--border-width: 1px;
+  --puzzle--background-color: #fff;
+  --puzzle--hover-color: #eee;
+  --puzzle--true-color: #070;
+  --puzzle--false-color: #f33;  
+}
+
+.logic-puzzle * {
+  box-sizing: border-box;
+}
+
+.logic-puzzle__label-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: var(--puzzle--border-width) solid var(--puzzle--border-color);  
+  width: var(--puzzle--void-size);
+}
+
+.logic-puzzle__label-group > * {
+  display: block;
+  height: var(--puzzle--grid-size);
+  line-height: var(--puzzle--grid-size);
+  padding-inline: calc(0.5 * (var(--puzzle--grid-size) - var(--puzzle--font-size)));
+  background-color: var(--puzzle--background-color);
+  font-size: var( --puzzle--font-size);
+}
+
+.logic-puzzle__label-group__title {
+  position: absolute;
+  top: var(--puzzle--border-width);
+  writing-mode: vertical-lr;
+  width: var(--puzzle--grid-size);
+  height: calc(100% - var(--puzzle--border-width));
+  text-align: center;
+  border: 1px solid var(--puzzle--border-color);
+  border-width: 0 1px;
+  font-weight: bold;
+}
+
+.orientation-column .logic-puzzle__label-group__title {
+  right: 0; 
+}
+
+.orientation-row .logic-puzzle__label-group__title {
+  transform: rotate(180deg);
+}
+
+.orientation-column .logic-puzzle__label-group__title ~ * {
+  padding-inline-end: calc(var(--puzzle--padding-size) + var(--puzzle--grid-size));
+}
+
+.orientation-row .logic-puzzle__label-group__title ~ * {
+  padding-inline-start: calc(var(--puzzle--padding-size) + var(--puzzle--grid-size));
+}
+
+.logic-puzzle__label-group > * + * {
+  border-top: var(--puzzle--border-width) solid var(--puzzle--border-color);
+}
+
+.logic-puzzle-input-grid__columns {
+  transform-origin: top left;
+  transform: translateY(var(--puzzle--void-size)) rotate(-90deg);
+}
+
+.key-hover {
+  background-color: var(--puzzle--hover-color);
+}
+
+.logic-puzzle-input-grid {
+  font-size: var(--puzzle--font-size);
+  display: grid;
+  position: relative;
+  grid-template-columns: var(--puzzle--void-size) 1fr;
+  grid-template-rows: var(--puzzle--void-size) 1fr;
+  margin: auto;
+}
+
+.logic-puzzle-input-grid__cells-row {
+  display: flex;
+}
+
+.logic-puzzle-input-grid__cell-group-row {
+  display: flex;
+}
+
+.logic-puzzle-input-grid__cell-group {
+  border-width: var(--puzzle--border-width);
+  border-style: solid;
+  border-color: var(--puzzle--border-color);
+}
+
+.logic-puzzle-input-grid__cell {
+  position: relative;
+  width: var(--puzzle--grid-size);
+  height: var(--puzzle--grid-size);
+  border-width: var(--puzzle--border-width);
+  border-style: dashed;
+  border-color: var(--puzzle--border-color);
+  background-color: var(--puzzle--background-color);
+  cursor: pointer;
+}
+
+.logic-puzzle-input-grid__cell.key-hover {
+  background-color: var(--puzzle--hover-color);
+}
+
+.logic-puzzle-input-grid__cell::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: var(--puzzle--border-color);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.logic-puzzle-input-grid__cell:hover::before {
+  opacity: 0.25;
+}
+
+.logic-puzzle-input-grid__cell:active::before {
+  opacity: 0.5;
+}
+
+.logic-puzzle-input-grid__cell::after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: var(--puzzle--grid-size);
+  font-size: var(--puzzle--mark-size);
+  color: transparent;
+  transition: all 0.2s ease-out;
+}
+
+.logic-puzzle-input-grid__cell.input-status--explicit-true::after {
+  color: #070;
+  opacity: 1;
+  content: '✓';
+}
+.logic-puzzle-input-grid__cell.input-status--explicit-false::after {
+  color: var(--puzzle--false-color);
+  font-size: var(--puzzle--mark-size);
+  opacity: 1;
+  content: '×';
+}
+.logic-puzzle-input-grid__cell:where(.implicit-false)::after {
+  color: var(--puzzle--false-color);
+  font-size: var(--puzzle--text-size);
+  opacity: 0.4;
+  content: '×';
+}
+  
