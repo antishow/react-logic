@@ -1,4 +1,4 @@
-import { normalizePuzzleInput, cyrb53 } from '../helpers';
+import { normalizePuzzleInput, cyrb53 } from '../helpers.js';
 
 export const PuzzleMonitor = ({ prompt, input, options }) => {
   const inputRows = normalizePuzzleInput({ input, options });
@@ -6,15 +6,15 @@ export const PuzzleMonitor = ({ prompt, input, options }) => {
 
   return (
     <div className="logic-puzzle-monitor">
-      <label className="prompt">{ prompt }</label>
+      <label className="prompt">{prompt}</label>
       <table>
         <thead>
           <tr>
-            { options.map((O, i) => <th key={i} data-name={ O.name }>{ O.label }</th>) }
+            {options.map((O, i) => <th key={i} data-name={O.name}>{O.label}</th>)}
           </tr>
         </thead>
         <tbody>
-          { inputRows.map((row, i) => {
+          {inputRows.map((row, i) => {
             return <tr key={i}>{
               Object.keys(row).map((k, j) => <td key={j} data-name={k}>{row[k]}</td>)
             }</tr>

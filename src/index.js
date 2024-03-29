@@ -1,4 +1,4 @@
-import { Puzzle } from './components/puzzle';
+import { Puzzle } from './components/puzzle.js';
 
 export default Puzzle;
 

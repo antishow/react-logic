@@ -1,5 +1,5 @@
-import { LabelGroup } from './label-group';
-import { CellGroup } from './cell-group';
+import { LabelGroup } from './label-group.js';
+import { CellGroup } from './cell-group.js';
 import { PuzzleMonitor } from './puzzle-monitor.js';
 import { CheckAnswerButton } from './check-answer.js';
 
