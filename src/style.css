@@ -2,7 +2,7 @@
   --puzzle--font-size: 14px;
   --puzzle--clue-size: 14px;
   --puzzle--mark-size: 16px;
-  --puzzle--void-size: 80px;
+  --puzzle--void-size: 100px;
   --puzzle--grid-size: 20px;
   --puzzle--padding-size: calc(0.5 * (var(--puzzle--grid-size) - var(--puzzle--font-size)));
   --puzzle--text-color: #000;
@@ -24,6 +24,11 @@
   flex-direction: column;
   border: var(--puzzle--border-width) solid var(--puzzle--border-color);  
   width: var(--puzzle--void-size);
+  box-shadow: -1px 1px #000;
+}
+
+.logic-puzzle__label-group.orientation-row {
+  box-shadow: 1px 1px #000;
 }
 
 .logic-puzzle__label-group > * {
@@ -91,6 +96,7 @@
 
 .logic-puzzle-input-grid__cell-group-row {
   display: flex;
+  box-shadow: 1px 1px #000;
 }
 
 .logic-puzzle-input-grid__cell-group {
