@@ -2,7 +2,9 @@ import { getInputHash } from '../helpers.js';
 
 const checkAnswer = ({ input, options, solution }) => {
   const inputHash = getInputHash({ input, options });
-
+  if (window.location.search.match(/logInputHash/)) {
+    console.log({ inputHash });
+  }
   return inputHash === parseInt(solution);
 }
 

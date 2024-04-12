@@ -5,7 +5,7 @@ export const PuzzleMonitor = ({ prompt, input, options }) => {
   const inputStr = cyrb53(JSON.stringify(inputRows));
 
   return (
-    <div className="logic-puzzle-monitor">
+    <div data-input={inputStr} className="logic-puzzle-monitor">
       <label className="prompt">{prompt}</label>
       <table>
         <thead>
