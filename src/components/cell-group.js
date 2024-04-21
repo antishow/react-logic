@@ -30,8 +30,8 @@ export const CellGroup = ({ row, column, hover, onClickCell, onHoverCell, input 
             return false;
           }
 
-          const rowMatch = new RegExp(`^${row.name}\:${r},${column.name}\:.+$`);
-          const colMatch = new RegExp(`^${row.name}\:.+,${column.name}\:${c}$`);
+          const rowMatch = new RegExp(`^${row.name}___${r},${column.name}___.+$`);
+          const colMatch = new RegExp(`^${row.name}___.+,${column.name}___${c}$`);
           return (inputKey.match(rowMatch) || inputKey.match(colMatch)) && (input[inputKey] === 2);
         }).length > 0;
 
