@@ -77,7 +77,7 @@
   transform: translateY(var(--puzzle--void-size)) rotate(-90deg);
 }
 
-.key-hover {
+.logic-puzzle__label-group .key-hover {
   background-color: var(--puzzle--hover-color);
 }
 
@@ -117,10 +117,6 @@
   cursor: pointer;
 }
 
-.logic-puzzle-input-grid__cell.key-hover {
-  background-color: var(--puzzle--hover-color);
-}
-
 .logic-puzzle-input-grid__cell::before {
   content: '';
   position: absolute;
@@ -133,6 +129,10 @@
   z-index: 1;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
+}
+
+.logic-puzzle-input-grid__cell.key-hover::before {
+  opacity: 0.1;
 }
 
 .logic-puzzle-input-grid__cell:hover::before {
