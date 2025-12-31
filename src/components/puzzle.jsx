@@ -1,9 +1,10 @@
-import { LabelGroup } from './label-group.js';
-import { CellGroup } from './cell-group.js';
-import { PuzzleMonitor } from './puzzle-monitor.js';
-import { CheckAnswerButton } from './check-answer.js';
+import { useState } from 'react';
+import { LabelGroup } from './label-group.jsx';
+import { CellGroup } from './cell-group.jsx';
+import { PuzzleMonitor } from './puzzle-monitor.jsx';
+import { CheckAnswerButton } from './check-answer.jsx';
 
-export const Puzzle = ({ title, description, instructions, prompt, solution, clues, options, useState }) => {
+export const Puzzle = ({ title, description, instructions, prompt, solution, clues, options }) => {
   const keys = options.map(O => O.name);
   const columns = [];
   const rows = [];
