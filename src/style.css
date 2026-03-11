@@ -72,6 +72,15 @@
   border-top: var(--puzzle--border-width) solid var(--puzzle--border-color);
 }
 
+.logic-puzzle__clues {
+  position: relative;
+  z-index: 2;
+}
+
+.logic-puzzle__clues em {
+  display: inline-block;
+}
+
 .logic-puzzle-input-grid__columns {
   transform-origin: top left;
   transform: translateY(var(--puzzle--void-size)) rotate(-90deg);

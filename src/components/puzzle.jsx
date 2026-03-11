@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { LabelGroup } from './label-group.jsx';
 import { CellGroup } from './cell-group.jsx';
 import { PuzzleMonitor } from './puzzle-monitor.jsx';
@@ -10,6 +10,7 @@ export const Puzzle = ({ title, description, instructions, prompt, solution, clu
   const rows = [];
   const [input, setInput] = useState([]);
   const [hover, setHover] = useState([]);
+  const elRef = useRef(null);
 
   for (let n = 1; n < keys.length; n++) {
     columns.push(keys[n]);
@@ -23,8 +24,41 @@ export const Puzzle = ({ title, description, instructions, prompt, solution, clu
     }
   }
 
+  useEffect(() => {
+    if (!elRef.current) {
+      return;
+    }
+
+    const clues = elRef.current.querySelector('.logic-puzzle__clues');
+    const emText = Array.from(clues.querySelectorAll('em'));
+
+    const handleMouseOver = (e) => {
+      if (!emText.includes(e.target)) {
+        return;
+      }
+
+      setHover(Object.values(e.target.dataset));
+    };
+
+    const handleMouseOut = (e) => {
+      if (!emText.includes(e.target)) {
+        return;
+      }
+
+      setHover([]);
+    };
+
+    clues.addEventListener('mouseover', handleMouseOver);
+    clues.addEventListener('mouseout', handleMouseOut);
+
+    return () => {
+      clues.removeEventListener('mouseover', handleMouseOver);
+      clues.removeEventListener('mouseout', handleMouseOut);
+    }
+  }, [ hover ]);
+
   return (
-    <div className="logic-puzzle">
+    <div ref={ elRef } className="logic-puzzle">
       <div
         className="logic-puzzle__header">
         <div

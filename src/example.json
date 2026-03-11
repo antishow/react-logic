@@ -1,0 +1,73 @@
+{
+	"title": "Lucia’s Magickal Potion Shop",
+	"description": "Once upon a time, there was a pretty little witch named Lucia who lived deep in a magical forest. She loved to make special potions for any of the villagers that would travel to her cottage. On one particularly busy day, Lucia had Five different visitors come looking for assistance. Can you help sort out the <strong>Name</strong> and <strong>Job</strong> of the people who came to visit, the <strong>Time</strong> they arrived, the <strong>Potion</strong> they asked for, and the <strong>Ingredient</strong> Lucia used to make each one?",
+	"instructions": "Click the boxes in the grid below to mark them. Clicking on an empty box will mark it as False, clicking on a False box will mark it as True, and clicking on a True box will empty it. As the rows in the first group (time) are filled in, the True boxes will be copied to your final answer at the bottom. Once it’s completely filled in, click on the Check Answer button to see if you got it right! To get started, the first clue says that Lucia used <strong>Orthosiphon Aristatus</strong> in the <strong>Love</strong> potion, so find the cell where those two things intersect and click on it twice.",
+	"solution": 4513125655603047,
+	"clues": [
+		"Lucia used <em>Orthosiphon Aristatus</em> as the main ingredient in a potion that makes the drinker feel <em>Loved</em>.",
+		"<em>Farmer</em> <em>O‘Brien</em> was already outside waiting when Lucia opened the shop at <em>7:00 am</em>. They had been up all night, and brought Lucia a nice salami to trade for a <em>Sleeping Potion</em>.",
+		"Lucia made five potions in total that day. One to make bad <em>Memories</em> go away, one to bring <em>Good Luck</em>, One for the <em>Teacher</em>, another for the <em>Hunter</em>, and one that was loaded with <em>Leonotis Leonurus</em>.",
+		"<em>Ms. Corcoran</em>, the village <em>Blacksmith</em>, is allergic to <em>Teucrium Marum</em> and could never have a potion made with it.",
+		"The <em>Hunter</em> arrived later than the <em>Teacher</em>.",
+		"Lucia had three different visitors after her twelve o’clock lunch: <em>Mr. Snow</em>, the village <em>Teacher</em>, and someone looking for a <em>Potion of Eternal Happiness</em>. <div class=\"note\">(but not necessarily in that order!)</div>",
+		"While <em>Amanita Pantherina</em> is usually one of Lucia’s favorite ingredients to use, it definitely wouldn’t have worked in the <em>Good Luck Potion</em>.",
+		"When <em>Mr. Jenkinson</em> visited, he brought some fresh <em>Teucrium Marum</em> from his garden. Lucia cooked it for about <em>Four-and-a-Half Hours</em> after he left, and then it was ready to use in the <em>Memory Potion</em> for someone else."
+	],
+	"options": [
+		{
+			"label": "Time",
+			"name": "time",
+			"values": [
+				"7:00 am",
+				"11:00 am",
+				"1:00 pm",
+				"3:00 pm",
+				"6:00 pm"
+			]
+		},
+		{
+			"label": "Name",
+			"name": "name",
+			"values": [
+				"O‘Brien",
+				"Snow",
+				"Jenkinson",
+				"Corcoran",
+				"Doherty"
+			]
+		},
+		{
+			"label": "Job",
+			"name": "job",
+			"values": [
+				"Farmer",
+				"Baker",
+				"Teacher",
+				"Hunter",
+				"Blacksmith"
+			]
+		},
+		{
+			"label": "Potion",
+			"name": "potion",
+			"values": [
+				"Memory",
+				"Good Luck",
+				"Happiness",
+				"Love",
+				"Sleep"
+			]
+		},
+		{
+			"label": "Ingredient",
+			"name": "ingredient",
+			"values": [
+				"Nepeta Cataria",
+				"Amanita Pantherina",
+				"Teucrium Marum",
+				"Orthosiphon Aristatus",
+				"Leonotis Leonurus"
+			]
+		}
+	]
+}

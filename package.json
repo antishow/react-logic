@@ -5,5 +5,9 @@
   "main": "src/index.js",
   "author": "antishow",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
 }
