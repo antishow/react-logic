@@ -29,8 +29,6 @@ export const Puzzle = ({ title, description, instructions, prompt, solution, clu
       return;
     }
 
-    console.log('effect!');
-
     const clues = elRef.current.querySelector('.logic-puzzle__clues');
     const emText = Array.from(clues.querySelectorAll('em'));
 
