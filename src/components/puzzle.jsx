@@ -29,6 +29,8 @@ export const Puzzle = ({ title, description, instructions, prompt, solution, clu
       return;
     }
 
+    console.log('effect!');
+
     const clues = elRef.current.querySelector('.logic-puzzle__clues');
     const emText = Array.from(clues.querySelectorAll('em'));
 
@@ -37,25 +39,32 @@ export const Puzzle = ({ title, description, instructions, prompt, solution, clu
         return;
       }
 
-      setHover(Object.values(e.target.dataset));
-    };
+      const clue = e.target;
+      const value = Object.values(clue.dataset);
+      const strValue = value.join(',');
 
-    const handleMouseOut = (e) => {
-      if (!emText.includes(e.target)) {
+      if (hover.join(',') === strValue) {
         return;
       }
 
-      setHover([]);
+      setHover(value);
+      const handleMouseMove = (move) => {
+        const { target } = move;
+        if (Object.values(target.dataset).join(',') === strValue) {
+          return;
+        }
+
+        setHover([]);
+        document.removeEventListener('mousemove', handleMouseMove);
+      }
+      document.addEventListener('mousemove', handleMouseMove);
     };
 
     clues.addEventListener('mouseover', handleMouseOver);
-    clues.addEventListener('mouseout', handleMouseOut);
-
     return () => {
       clues.removeEventListener('mouseover', handleMouseOver);
-      clues.removeEventListener('mouseout', handleMouseOut);
     }
-  }, [ hover ]);
+  });
 
   return (
     <div ref={ elRef } className="logic-puzzle">
