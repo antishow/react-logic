@@ -27,13 +27,14 @@ export const ClueList = ({ ref, clues, setHover }: ClueListProps) => {
 			setHover(value);
 			const handleMouseMove = (move: MouseEvent) => {
 				const target = move.target as HTMLElement;
+				const targetValue = Object.values(target.dataset);
 				
-				if (Object.values(target.dataset).join(',') === strValue) {
+				if (targetValue.join(',') === strValue) {
 					return;
 				}
 
-				setHover([]);
 				document.removeEventListener('mousemove', handleMouseMove);
+				setHover(targetValue);
 			};
 			document.addEventListener('mousemove', handleMouseMove);
 		};
@@ -46,7 +47,7 @@ export const ClueList = ({ ref, clues, setHover }: ClueListProps) => {
 
 	return (
 		<ol className="logic-puzzle__clues">
-			{Array.from(clues).map((clue, n) => (
+			{clues.map((clue, n) => (
 				<li
 					key={n}
 					className="logic-puzzle__clue"
