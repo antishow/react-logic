@@ -164,7 +164,7 @@
 }
 
 .logic-puzzle-input-grid__cell.input-status--explicit-true::after {
-  color: #070;
+  color: var(--puzzle--true-color);
   opacity: 1;
   content: '✓';
 }
