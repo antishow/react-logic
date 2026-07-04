@@ -1,6 +1,7 @@
+import type { PuzzleOption } from '../index.ts';
+
 import { LabelGroup } from './label-group.tsx';
 import { CellGroup } from './cell-group.tsx';
-import { PuzzleOption } from '../index.ts';
 import { Orientation } from './label-group.tsx';
 
 type InputGridProps = {

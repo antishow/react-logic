@@ -1,5 +1,5 @@
 import { normalizePuzzleInput, cyrb53 } from '../helpers.ts';
-import { PuzzleOption } from '../index.js';
+import type { PuzzleOption } from '../index.ts';
 
 type PuzzleMonitorProps = {
 	input: Record<string, number>,

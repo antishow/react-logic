@@ -1,5 +1,5 @@
 import { getInputHash } from '../helpers.ts';
-import { PuzzleOption } from '../index.js';
+import type { PuzzleOption } from '../index.js';
 
 type CheckAnswerButtonProps = {
 	input: Record<string, number>,

@@ -1,4 +1,4 @@
-import { PuzzleOption } from "..";
+import type { PuzzleOption } from "..";
 
 const INPUT_STATUS = [
 	'input-status--empty',

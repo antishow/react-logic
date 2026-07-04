@@ -1,7 +1,9 @@
-export enum Orientation {
-	Column = 'column',
-	Row = 'row',
-}
+export const Orientation = {
+	Column: 'column',
+	Row: 'row',
+} as const;
+
+export type Orientation = typeof Orientation[keyof typeof Orientation];
 
 type LabelGroupProps = {
 	title: string,

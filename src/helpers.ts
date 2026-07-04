@@ -1,4 +1,4 @@
-import { PuzzleOption } from ".";
+import type { PuzzleOption } from ".";
 
 /**
  * Returns the 'group index' for the given row and column names from
