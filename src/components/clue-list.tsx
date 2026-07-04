@@ -3,11 +3,10 @@ import { useEffect } from 'react';
 type ClueListProps = {
 	ref: any,
 	clues: Array<string>,
-	hover: Array<string>,
 	setHover: Function,
 };
 
-export const ClueList = ({ ref, clues, hover, setHover }: ClueListProps) => {
+export const ClueList = ({ ref, clues, setHover }: ClueListProps) => {
 	useEffect(() => {
 		if (!ref.current) {
 			return;
@@ -24,10 +23,6 @@ export const ClueList = ({ ref, clues, hover, setHover }: ClueListProps) => {
 			const clue: HTMLElement = e.target as HTMLElement;
 			const value = Object.values(clue.dataset);
 			const strValue = value.join(',');
-
-			if (hover.join(',') === strValue) {
-				return;
-			}
 
 			setHover(value);
 			const handleMouseMove = (move: MouseEvent) => {

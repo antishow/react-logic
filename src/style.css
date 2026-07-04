@@ -1,7 +1,7 @@
 :root {
   --puzzle--font-size: 14px;
   --puzzle--clue-size: 14px;
-  --puzzle--mark-size: 16px;
+  --puzzle--mark-size: 14px;
   --puzzle--void-size: 100px;
   --puzzle--grid-size: 20px;
   --puzzle--padding-size: calc(0.5 * (var(--puzzle--grid-size) - var(--puzzle--font-size)));
