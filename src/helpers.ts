@@ -1,3 +1,5 @@
+import { PuzzleOption } from ".";
+
 /**
  * Returns the 'group index' for the given row and column names from
  * a set of puzzle options. Starts at 0 in the upper left and then 
@@ -5,7 +7,11 @@
  * groups in the bottom right area still "count", so there may be 
  * gaps. Pretty much only used by quantifyInputKey below.
  */
-export const getCellGroupIndex = ({ rowName, columnName, options }) => {
+export const getCellGroupIndex = ({ rowName, columnName, options }: {
+  rowName: string,
+  columnName: string,
+  options: Array<PuzzleOption>
+}) => {
   const rowIndex = options.findIndex(O => O.name === rowName);
   const columnIndex = options.findIndex(O => O.name === columnName) - 1;
 
@@ -19,7 +25,7 @@ export const getCellGroupIndex = ({ rowName, columnName, options }) => {
 /**
  * Parse the input key to get the name/value for the row/column
  */
-export const parseInputKey = (inputKey) => {
+export const parseInputKey = (inputKey: string): Record<string, string> => {
   const split = inputKey.split(',').map(r => r.split('___'));
 
   const rowName = split[0][0];
@@ -34,16 +40,24 @@ export const parseInputKey = (inputKey) => {
  * Given an inputKey and a set of options, this will use the row, column, 
  * and group indices from the key to determine where the related cell is.
  */
-export const quantifyInputKey = (inputKey, options) => {
-  const size = options[0].values.length;
+export const quantifyInputKey = (inputKey: string, options: Array<PuzzleOption>): number => {
+  const optionSizes: Array<number> = options.reduce((sizes: Array<number>, option: PuzzleOption) => [ ...sizes, option.values.length ], [])
+  const size = Math.max(...optionSizes);
   const { rowName, rowValue, columnName, columnValue } = parseInputKey(inputKey);
 
   const groupIndex = getCellGroupIndex({ rowName, columnName, options });
 
   const row = options.find(O => O.name === rowName);
+  if (!row) {
+    return 0;
+  }
+
   const rowIndex = row.values.indexOf(rowValue);
 
   const column = options.find(O => O.name === columnName);
+  if (!column) {
+    return 0;
+  }
   const columnIndex = column.values.indexOf(columnValue);
 
   return columnIndex + (size * rowIndex) + (size * size * groupIndex);
@@ -52,7 +66,7 @@ export const quantifyInputKey = (inputKey, options) => {
 /**
  * Sort a set of 'inputKey' strings based on quantifyInputKey
  */
-export const sortInputKeys = (inputKeys, options) => {
+export const sortInputKeys = (inputKeys: Array<string>, options: Array<PuzzleOption>): Array<Record<string, string>> => {
   return inputKeys.sort((A, B) => {
     return quantifyInputKey(A, options) - quantifyInputKey(B, options);
   }).map(k => parseInputKey(k));
@@ -61,7 +75,7 @@ export const sortInputKeys = (inputKeys, options) => {
 /*
  * Generates the base data array for normalizePuzzleInput.
  */
-export const getEmptyInputForOptions = (options) => {
+export const getEmptyInputForOptions = (options: Array<PuzzleOption>) => {
   if (!options || options.length === 0) {
     return [];
   }
@@ -82,7 +96,10 @@ export const getEmptyInputForOptions = (options) => {
 /**
  * Returns the puzzle input as a sorted array of generic objects
  */
-export const normalizePuzzleInput = ({ input, options }) => {
+export const normalizePuzzleInput = ({ input, options }: {
+  input: Record<string, number>,
+  options: Array<PuzzleOption>
+}) => {
   const base = getEmptyInputForOptions(options);
   const trueKeys = Object.keys(input).filter(K => input[K] === 2);
   const sortedInput = sortInputKeys(trueKeys, options);
@@ -103,7 +120,7 @@ export const normalizePuzzleInput = ({ input, options }) => {
 /**
  * Hash a string. NOT secure, but good enough to hide a puzzle solution.
  */
-export const cyrb53 = (str, seed = 0) => {
+export const cyrb53 = (str: string, seed:number = 0): number => {
   let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
   for (let i = 0, ch; i < str.length; i++) {
     ch = str.charCodeAt(i);
@@ -118,7 +135,10 @@ export const cyrb53 = (str, seed = 0) => {
   return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 }
 
-export const getInputHash = ({ input, options }) => {
+export const getInputHash = ({ input, options }: {
+  input: Record<string, number>,
+  options: Array<PuzzleOption>
+}) => {
   const inputRows = normalizePuzzleInput({ input, options });
   const inputStr = JSON.stringify(inputRows);
 
