@@ -24,7 +24,6 @@ export const ClueList = ({ ref, clues, setHover }: ClueListProps) => {
 			const value = Object.values(clue.dataset);
 			const strValue = value.join(',');
 
-			setHover(value);
 			const handleMouseMove = (move: MouseEvent) => {
 				const target = move.target as HTMLElement;
 				const targetValue = Object.values(target.dataset);
@@ -37,6 +36,7 @@ export const ClueList = ({ ref, clues, setHover }: ClueListProps) => {
 				setHover(targetValue);
 			};
 			document.addEventListener('mousemove', handleMouseMove);
+			setHover(value);
 		};
 
 		clues.addEventListener('mouseover', handleMouseOver);
