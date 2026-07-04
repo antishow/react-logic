@@ -4,7 +4,7 @@ import { CheckAnswerButton } from './check-answer.jsx';
 import { ClueList } from './clue-list.jsx';
 import { PuzzleHeader } from './puzzle-header.jsx';
 import { InputGrid } from './input-grid.jsx';
-import { Puzzle as IPuzzle } from '../index.ts';
+import type { Puzzle as IPuzzle } from '../index.ts';
 
 export const Puzzle = ({
 	title,
