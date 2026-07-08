@@ -34,17 +34,19 @@ export const CellGroup = ({
 					className="logic-puzzle-input-grid__cell-group-row">
 					{column.values?.map((c, j) => {
 						const cellID = `${row.name}___${r},${column.name}___${c}`;
-						const cellProps = {
-							[`data-${row.name}`]: r,
-							[`data-${column.name}`]: c,
-							onClick: () => onClickCell(cellID),
-						};
 
 						const rowValue = row.values[i];
 						const columnValue = column.values[j];
 
 						const inputStatusIndex = input[cellID] || 0;
 						const inputStatus = INPUT_STATUS[inputStatusIndex];
+
+						const cellProps = {
+							[`data-${row.name}`]: r,
+							[`data-${column.name}`]: c,
+							[`data-status`]: inputStatusIndex,
+							onClick: () => onClickCell(cellID),
+						};
 
 						const className = [
 							'logic-puzzle-input-grid__cell',
@@ -54,23 +56,33 @@ export const CellGroup = ({
 								: '',
 						].filter((c) => c);
 
-						const isImplicitlyFalse =
-							Object.keys(input).filter((inputKey) => {
-								if (inputKey === cellID) {
-									return false;
-								}
+						const inputKeys = Object.keys(input);
+						const trueInSameRow = inputKeys.filter(K => {
+							if (K === cellID) {
+								return false;
+							}
 
-								const rowMatch = new RegExp(
-									`^${row.name}___${r},${column.name}___.+$`
-								);
-								const colMatch = new RegExp(
-									`^${row.name}___.+,${column.name}___${c}$`
-								);
-								return (
-									(inputKey.match(rowMatch) || inputKey.match(colMatch)) &&
-									input[inputKey] === 2
-								);
-							}).length > 0;
+							const rowMatch = new RegExp(
+								`^${row.name}___${r},${column.name}___.+$`
+							);
+
+							return K.match(rowMatch) && (input[K] > 1)
+						});
+
+						const trueInSameCol = inputKeys.filter(K => {
+							if (K === cellID) {
+								return false;
+							}
+
+							const colMatch = new RegExp(
+								`^${row.name}___.+,${column.name}___${c}$`
+							);
+
+							return K.match(colMatch) && (input[K] > 1)
+						});
+
+						const trueNeighborCount = trueInSameRow.length + trueInSameCol.length;
+						const isImplicitlyFalse = trueNeighborCount > 0;
 
 						if (isImplicitlyFalse) {
 							className.push('implicit-false');
