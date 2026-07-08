@@ -1,18 +1,21 @@
+import { useContext } from 'react';
 import type { PuzzleOption } from '../index.ts';
 
+import { HoverContext, InputContext } from './puzzle.tsx';
 import { LabelGroup } from './label-group.tsx';
 import { CellGroup } from './cell-group.tsx';
 import { Orientation } from './label-group.tsx';
 
 type InputGridProps = {
 	options: Array<PuzzleOption>,
-	hover: Array<string>,
 	setHover: Function,
-	input: Record<string, number>,
 	setInput: Function,
 };
 
-export const InputGrid = ({ options, hover, setHover, input, setInput }: InputGridProps) => {
+export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
+	const input = useContext<Record<string, number>>(InputContext);
+	const hover = useContext(HoverContext);
+	
 	const keys = options.map((O) => O.name);
 	const columns: Array<string> = [];
 	const rows: Array<string> = [];

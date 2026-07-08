@@ -1,10 +1,13 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, createContext } from 'react';
 import { PuzzleMonitor } from './puzzle-monitor.jsx';
 import { CheckAnswerButton } from './check-answer.jsx';
 import { ClueList } from './clue-list.jsx';
 import { PuzzleHeader } from './puzzle-header.jsx';
 import { InputGrid } from './input-grid.jsx';
 import type { Puzzle as IPuzzle } from '../index.ts';
+
+export const InputContext = createContext({});
+export const HoverContext = createContext([]);
 
 export const Puzzle = ({
 	title,
@@ -19,12 +22,16 @@ export const Puzzle = ({
 	const ref = useRef(null);
 
 	return (
-		<div ref={ref} className="logic-puzzle">
-			<PuzzleHeader {...{ title, description, instructions }} />
-			<ClueList {...{ ref, clues, hover, setHover }} />
-			<InputGrid {...{ options, hover, setHover, input, setInput }} />
-			<PuzzleMonitor {...{ prompt, input, options }} />
-			<CheckAnswerButton {...{ solution, input, options }} />
-		</div>
+		<InputContext value={ input } >
+			<HoverContext value={ hover }>
+				<div ref={ref} className="logic-puzzle">
+					<PuzzleHeader {...{ title, description, instructions }} />
+					<ClueList {...{ ref, clues, setHover }} />
+					<InputGrid {...{ options, setHover, setInput }} />
+					<PuzzleMonitor {...{ options }} />
+					<CheckAnswerButton {...{ solution, options }} />
+				</div>
+			</HoverContext>
+		</InputContext>
 	);
 };

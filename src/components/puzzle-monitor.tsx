@@ -1,12 +1,14 @@
+import { useContext } from 'react';
 import { normalizePuzzleInput, cyrb53 } from '../helpers.ts';
 import type { PuzzleOption } from '../index.ts';
+import { InputContext } from './puzzle.tsx';
 
 type PuzzleMonitorProps = {
-	input: Record<string, number>,
 	options: Array<PuzzleOption>
 }
 
-export const PuzzleMonitor = ({ input, options }: PuzzleMonitorProps) => {
+export const PuzzleMonitor = ({ options }: PuzzleMonitorProps) => {
+	const input = useContext(InputContext);
 	const inputRows = normalizePuzzleInput({ input, options });
 	const inputStr = cyrb53(JSON.stringify(inputRows));
 
