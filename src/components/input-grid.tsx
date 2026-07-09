@@ -17,8 +17,8 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 	const hover = useContext(HoverContext);
 	
 	const keys = options.map((O) => O.name);
-	const columns: Array<string> = [];
-	const rows: Array<string> = [];
+	const columns: string[] = [];
+	const rows: string[] = [];
 
 	for (let n = 1; n < keys.length; n++) {
 		columns.push(keys[n]);
@@ -40,7 +40,6 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 					<LabelGroup
 						key={ n }
 						name={ c }
-						hover={ hover }
 						title={ options.find((O) => O.name === c)?.label || 'Untitled' }
 						labels={ options.find((O) => O.name === c)?.values || [] }
 						onHoverLabel={ (name: string) => setHover( [ name ] ) }
@@ -54,7 +53,6 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 					<LabelGroup
 						key={ n }
 						name={ r }
-						hover={ hover }
 						title={ options.find((O) => O.name === r)?.label || 'Untitled' }
 						labels={ options.find((O) => O.name === r)?.values || [] }
 						onHoverLabel={ (name: string) => setHover( [ name ] ) }
@@ -84,8 +82,7 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 									key={`group-${i}-${j}`}
 									row={rowOption}
 									column={columnOption}
-									hover={hover}
-									input={input}
+									setHover={setHover}
 									onClickCell={(cellID: string) => {
 										const inputCells = Object.keys(input);
 
@@ -98,7 +95,6 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 											setInput({ ...input, [cellID]: 1 });
 										}
 									}}
-									onHoverCell={(hover: Array<string>) => setHover(hover)}
 								/>
 							);
 						})}

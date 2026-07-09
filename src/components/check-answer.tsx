@@ -4,20 +4,24 @@ import type { PuzzleOption } from '../index.js';
 import { InputContext } from './puzzle.tsx';
 
 type CheckAnswerButtonProps = {
-	options: Array<PuzzleOption>,
-	solution: number
-}
+	options: Array<PuzzleOption>;
+	solution: number;
+};
 
-export const CheckAnswerButton = ({ options, solution }: CheckAnswerButtonProps) => {
+export const CheckAnswerButton = ({
+	options,
+	solution,
+}: CheckAnswerButtonProps) => {
 	const input = useContext(InputContext);
 
 	return (
 		<button
 			className="check-answer-button"
 			onClick={() => {
-				const solved = getInputHash({ input, options }) === solution;
-				const dispatch = solved ? 'puzzle_solved' : 'puzzle_wrong';
-				
+				const inputHash = getInputHash({ input, options });
+				const dispatch =
+					inputHash === solution ? 'puzzle_solved' : 'puzzle_wrong';
+
 				document.dispatchEvent(new CustomEvent(dispatch));
 			}}>
 			Check Answer
