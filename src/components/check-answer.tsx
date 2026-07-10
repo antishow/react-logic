@@ -1,10 +1,10 @@
+import type { PuzzleOption } from './puzzle.tsx';
 import { useContext } from 'react';
 import { getInputHash } from '../helpers.ts';
-import type { PuzzleOption } from '../index.js';
 import { InputContext } from './puzzle.tsx';
 
 type CheckAnswerButtonProps = {
-	options: Array<PuzzleOption>;
+	options: PuzzleOption[];
 	solution: number;
 };
 

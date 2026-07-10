@@ -1,21 +1,20 @@
+import type { PuzzleOption } from './puzzle.tsx';
 import { useContext } from 'react';
-import type { PuzzleOption } from '../index.ts';
-
 import { HoverContext, InputContext } from './puzzle.tsx';
 import { LabelGroup } from './label-group.tsx';
 import { CellGroup } from './cell-group.tsx';
 import { Orientation } from './label-group.tsx';
 
 type InputGridProps = {
-	options: Array<PuzzleOption>,
-	setHover: Function,
-	setInput: Function,
+	options: PuzzleOption[];
+	setHover: Function;
+	setInput: Function;
 };
 
 export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 	const input = useContext<Record<string, number>>(InputContext);
 	const hover = useContext(HoverContext);
-	
+
 	const keys = options.map((O) => O.name);
 	const columns: string[] = [];
 	const rows: string[] = [];
@@ -38,12 +37,12 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 			<div className="logic-puzzle-input-grid__columns">
 				{columns.map((c, n) => (
 					<LabelGroup
-						key={ n }
-						name={ c }
-						title={ options.find((O) => O.name === c)?.label || 'Untitled' }
-						labels={ options.find((O) => O.name === c)?.values || [] }
-						onHoverLabel={ (name: string) => setHover( [ name ] ) }
-						orientation={ Orientation.Column }
+						key={n}
+						name={c}
+						title={options.find((O) => O.name === c)?.label || 'Untitled'}
+						labels={options.find((O) => O.name === c)?.values || []}
+						onHoverLabel={(name: string) => setHover([name])}
+						orientation={Orientation.Column}
 					/>
 				))}
 			</div>
@@ -51,12 +50,12 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 			<div className="logic-puzzle-input-grid__rows">
 				{rows.map((r, n) => (
 					<LabelGroup
-						key={ n }
-						name={ r }
-						title={ options.find((O) => O.name === r)?.label || 'Untitled' }
-						labels={ options.find((O) => O.name === r)?.values || [] }
-						onHoverLabel={ (name: string) => setHover( [ name ] ) }
-						orientation={ Orientation.Row }
+						key={n}
+						name={r}
+						title={options.find((O) => O.name === r)?.label || 'Untitled'}
+						labels={options.find((O) => O.name === r)?.values || []}
+						onHoverLabel={(name: string) => setHover([name])}
+						orientation={Orientation.Row}
 					/>
 				))}
 			</div>

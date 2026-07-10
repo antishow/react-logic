@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 type ClueListProps = {
-	clues: string[],
-	setHover: Function,
+	clues: string[];
+	setHover: Function;
 };
 
 export const ClueList = ({ clues, setHover }: ClueListProps) => {
@@ -14,7 +14,7 @@ export const ClueList = ({ clues, setHover }: ClueListProps) => {
 		}
 
 		const clues: HTMLElement = ref.current;
-		const emText: Array<HTMLElement> = Array.from(clues.querySelectorAll('em'));
+		const emText: HTMLElement[] = Array.from(clues.querySelectorAll('em'));
 
 		const handleMouseOver = (e: MouseEvent) => {
 			if (!emText.includes(e.target as HTMLElement)) {
@@ -28,7 +28,7 @@ export const ClueList = ({ clues, setHover }: ClueListProps) => {
 			const handleMouseMove = (move: MouseEvent) => {
 				const target = move.target as HTMLElement;
 				const targetValue = Object.values(target.dataset);
-				
+
 				if (targetValue.join(',') === strValue) {
 					return;
 				}
@@ -47,7 +47,7 @@ export const ClueList = ({ clues, setHover }: ClueListProps) => {
 	});
 
 	return (
-		<ol ref={ ref } className="logic-puzzle__clues">
+		<ol ref={ref} className="logic-puzzle__clues">
 			{clues.map((clue, n) => (
 				<li
 					key={n}

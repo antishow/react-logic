@@ -1,11 +1,11 @@
+import type { PuzzleOption } from './puzzle.tsx';
 import { useContext } from 'react';
 import { normalizePuzzleInput, cyrb53 } from '../helpers.ts';
-import type { PuzzleOption } from '../index.ts';
 import { InputContext } from './puzzle.tsx';
 
 type PuzzleMonitorProps = {
-	options: Array<PuzzleOption>
-}
+	options: PuzzleOption[];
+};
 
 export const PuzzleMonitor = ({ options }: PuzzleMonitorProps) => {
 	const input = useContext(InputContext);

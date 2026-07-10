@@ -1,4 +1,4 @@
-import type { PuzzleOption } from '..';
+import type { PuzzleOption } from './puzzle';
 import { Cell } from './cell';
 
 type CellGroupProps = {

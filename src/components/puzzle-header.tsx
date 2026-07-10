@@ -1,10 +1,14 @@
 type PuzzleHeaderProps = {
-	title: string,
-	description: string,
-	instructions: string,
+	title: string;
+	description: string;
+	instructions: string;
 };
 
-export const PuzzleHeader = ({ title, description, instructions }: PuzzleHeaderProps) => (
+export const PuzzleHeader = ({
+	title,
+	description,
+	instructions,
+}: PuzzleHeaderProps) => (
 	<div className="logic-puzzle__header">
 		<div
 			className="logic-puzzle__title"
