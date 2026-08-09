@@ -122,7 +122,7 @@ export const normalizePuzzleInput = ({
 	const base = getEmptyInputForOptions(options);
 	const trueKeys = Object.keys(input).filter((K) => input[K] > 1);
 	const truePrimaryKeys = trueKeys.filter((K) =>
-		K.match(new RegExp(`/^${primaryKey}___/`))
+		K.startsWith(`${primaryKey}___`)
 	);
 	const sortedInput = sortInputKeys(truePrimaryKeys, options);
 
