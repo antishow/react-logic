@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { HoverContext, InputContext } from './puzzle';
+import { applyFilters } from '@antishow/hooks';
 
 type CellProps = {
 	rowName: string;
@@ -26,7 +27,11 @@ export const Cell = (props: CellProps) => {
 
 	const cellID = `${rowName}___${rowValue},${columnName}___${columnValue}`;
 	const inputStatusIndex = input[cellID] || 0;
-	const inputStatus = INPUT_STATUS[inputStatusIndex];
+	const inputStatusOptions = applyFilters(
+		'reactLogic.inputStatusOptions',
+		INPUT_STATUS
+	);
+	const inputStatus = inputStatusOptions[inputStatusIndex];
 
 	const cellProps = {
 		[`data-${rowName}`]: rowValue,
