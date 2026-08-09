@@ -118,7 +118,7 @@ export const normalizePuzzleInput = ({
 	options: PuzzleOption[];
 }) => {
 	const base = getEmptyInputForOptions(options);
-	const trueKeys = Object.keys(input).filter((K) => input[K] === 2);
+	const trueKeys = Object.keys(input).filter((K) => input[K] > 1);
 	const sortedInput = sortInputKeys(trueKeys, options);
 
 	return base.map((row) => {
