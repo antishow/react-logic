@@ -16,7 +16,7 @@ type PuzzleMonitorProps = {
 };
 
 const BasicPuzzleTable = (props: RenderMonitorProps) => {
-	const { input, setInput, options } = props;
+	const { input, options } = props;
 	const normalizedInput = normalizePuzzleInput({ input, options });
 	const inputStr = cyrb53(JSON.stringify(normalizedInput));
 
