@@ -3,14 +3,20 @@ import { useContext } from 'react';
 import { normalizePuzzleInput, cyrb53 } from '../helpers.ts';
 import { InputContext } from './puzzle.tsx';
 
-type PuzzleMonitorProps = {
+type RenderMonitorProps = {
 	options: PuzzleOption[];
+	input: any;
 };
 
-export const PuzzleMonitor = ({ options }: PuzzleMonitorProps) => {
-	const input = useContext(InputContext);
-	const inputRows = normalizePuzzleInput({ input, options });
-	const inputStr = cyrb53(JSON.stringify(inputRows));
+type PuzzleMonitorProps = {
+	options: PuzzleOption[];
+	RenderMonitor: React.ComponentType<RenderMonitorProps>;
+};
+
+const BasicPuzzleTable = (props: RenderMonitorProps) => {
+	const { input, options } = props;
+	const normalizedInput = normalizePuzzleInput({ input, options });
+	const inputStr = cyrb53(JSON.stringify(normalizedInput));
 
 	return (
 		<div data-input={inputStr} className="logic-puzzle-monitor">
@@ -25,7 +31,7 @@ export const PuzzleMonitor = ({ options }: PuzzleMonitorProps) => {
 					</tr>
 				</thead>
 				<tbody>
-					{inputRows.map((row, i) => {
+					{normalizedInput.map((row, i) => {
 						return (
 							<tr key={i}>
 								{Object.keys(row).map((k, j) => (
@@ -40,4 +46,15 @@ export const PuzzleMonitor = ({ options }: PuzzleMonitorProps) => {
 			</table>
 		</div>
 	);
+};
+
+export const PuzzleMonitor = (props: PuzzleMonitorProps) => {
+	const { options, RenderMonitor } = props;
+	const input = useContext(InputContext);
+
+	if (!RenderMonitor) {
+		return <BasicPuzzleTable {...{ input, options }} />;
+	}
+
+	return <RenderMonitor {...{ input, options }} />;
 };
