@@ -31,7 +31,7 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 		}
 	}
 
-	const onClickCell = (cellID: string) => {
+	const onClickCell = (cellID: string, clickEvent: MouseEvent) => {
 		const inputCells = Object.keys(input);
 		const possibleCellStates = applyFilters(
 			'reactLogic.possibleCellStates',
@@ -40,9 +40,12 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 		);
 
 		if (inputCells.includes(cellID)) {
+			const cellValue = clickEvent.shiftKey
+				? 1
+				: (input[cellID] + 1) % (possibleCellStates + 1);
 			setInput({
 				...input,
-				[cellID]: (input[cellID] + 1) % (possibleCellStates + 1),
+				[cellID]: cellValue,
 			});
 		} else {
 			setInput({ ...input, [cellID]: 1 });

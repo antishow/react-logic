@@ -30,7 +30,7 @@ export const CellGroup = ({
 							rowValue={rowValue}
 							columnName={column.name}
 							columnValue={columnValue}
-							onClick={onClickCell}
+							onClickCell={onClickCell}
 							setHover={setHover}
 						/>
 					))}

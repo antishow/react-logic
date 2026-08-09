@@ -7,7 +7,7 @@ type CellProps = {
 	rowValue: string;
 	columnName: string;
 	columnValue: string;
-	onClick: Function;
+	onClickCell: Function;
 	setHover: Function;
 };
 
@@ -19,7 +19,7 @@ type NeighborList = {
 const INPUT_STATUS = ['empty', 'explicit-false', 'explicit-true'];
 
 export const Cell = (props: CellProps) => {
-	const { rowName, rowValue, columnName, columnValue, onClick, setHover } =
+	const { rowName, rowValue, columnName, columnValue, onClickCell, setHover } =
 		props;
 
 	const hover = useContext(HoverContext);
@@ -38,7 +38,6 @@ export const Cell = (props: CellProps) => {
 		[`data-${rowName}`]: rowValue,
 		[`data-${columnName}`]: columnValue,
 		[`data-status`]: inputStatusIndex,
-		onClick: () => onClick(cellID),
 	};
 
 	const className = [
@@ -99,6 +98,7 @@ export const Cell = (props: CellProps) => {
 		<div
 			onMouseEnter={() => setHover([rowValue, columnValue])}
 			onMouseLeave={() => setHover([])}
+			onClick={(e) => onClickCell(cellID, e)}
 			className={className.join(' ')}
 			{...cellProps}
 		/>
