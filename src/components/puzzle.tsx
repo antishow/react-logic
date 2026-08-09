@@ -23,7 +23,7 @@ export type PuzzleProps = {
 	solution: number;
 	clues: string[];
 	options: PuzzleOption[];
-	RenderPuzzleMonitor: React.ComponentType<RenderMonitorProps>;
+	RenderPuzzleMonitor?: React.ComponentType<RenderMonitorProps>;
 };
 
 export const Puzzle = ({
