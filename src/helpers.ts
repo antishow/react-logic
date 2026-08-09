@@ -118,9 +118,13 @@ export const normalizePuzzleInput = ({
 	input: Record<string, number>;
 	options: PuzzleOption[];
 }) => {
+	const primaryKey = options[0].name;
 	const base = getEmptyInputForOptions(options);
 	const trueKeys = Object.keys(input).filter((K) => input[K] > 1);
-	const sortedInput = sortInputKeys(trueKeys, options);
+	const truePrimaryKeys = trueKeys.filter((K) =>
+		K.match(new RegExp(`/^${primaryKey}___/`))
+	);
+	const sortedInput = sortInputKeys(truePrimaryKeys, options);
 
 	const normalizedInput = base.map((row) => {
 		sortedInput.forEach((assertion) => {
