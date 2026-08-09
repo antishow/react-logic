@@ -1,3 +1,4 @@
+import { applyFilters } from '@antishow/hooks';
 import type { PuzzleOption } from './components/puzzle.tsx';
 
 /**
@@ -121,7 +122,7 @@ export const normalizePuzzleInput = ({
 	const trueKeys = Object.keys(input).filter((K) => input[K] > 1);
 	const sortedInput = sortInputKeys(trueKeys, options);
 
-	return base.map((row) => {
+	const normalizedInput = base.map((row) => {
 		sortedInput.forEach((assertion) => {
 			const { rowName, rowValue, columnName, columnValue } = assertion;
 
@@ -132,6 +133,13 @@ export const normalizePuzzleInput = ({
 
 		return row;
 	});
+
+	return applyFilters(
+		'reactLogic.normalizePuzzleInput',
+		normalizedInput,
+		input,
+		options
+	);
 };
 
 /**
