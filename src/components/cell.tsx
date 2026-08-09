@@ -29,7 +29,8 @@ export const Cell = (props: CellProps) => {
 	const inputStatusIndex = input[cellID] || 0;
 	const inputStatusOptions = applyFilters(
 		'reactLogic.inputStatusOptions',
-		INPUT_STATUS
+		INPUT_STATUS,
+		{ rowName, rowValue, columnName, columnValue }
 	);
 	const inputStatus = inputStatusOptions[inputStatusIndex];
 
@@ -83,7 +84,12 @@ export const Cell = (props: CellProps) => {
 
 	const trueNeighborCount =
 		trueNeighbors.row.length + trueNeighbors.column.length;
-	const isImplicitlyFalse = trueNeighborCount > 0;
+
+	const isImplicitlyFalse = applyFilters(
+		'reactLogic.isImplicitlyFalse',
+		trueNeighborCount > 0,
+		{ rowName, rowValue, columnName, columnValue, trueNeighbors, input }
+	);
 
 	if (isImplicitlyFalse) {
 		className.push('implicit-false');
