@@ -1,5 +1,5 @@
 {
-  "name": "react-logic",
+  "name": "@antishow/react-logic",
   "version": "2.0.0",
   "description": "React Component to display a classic grid-based logic puzzle",
   "main": "src/index.js",
@@ -8,7 +8,8 @@
   "type": "module",
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "@antishow/hooks": "antishow/hooks"
   },
   "devDependencies": {
     "@types/react": "^19.2.17"

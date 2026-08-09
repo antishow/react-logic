@@ -38,6 +38,8 @@
   padding-inline: calc(0.5 * (var(--puzzle--grid-size) - var(--puzzle--font-size)));
   background-color: var(--puzzle--background-color);
   font-size: var( --puzzle--font-size);
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .logic-puzzle__label-group__title {

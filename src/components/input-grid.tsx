@@ -1,6 +1,8 @@
+import { applyFilters } from '@antishow/hooks';
+
 import type { PuzzleOption } from './puzzle.tsx';
 import { useContext } from 'react';
-import { HoverContext, InputContext } from './puzzle.tsx';
+import { InputContext } from './puzzle.tsx';
 import { LabelGroup } from './label-group.tsx';
 import { CellGroup } from './cell-group.tsx';
 import { Orientation } from './label-group.tsx';
@@ -13,8 +15,6 @@ type InputGridProps = {
 
 export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 	const input = useContext<Record<string, number>>(InputContext);
-	const hover = useContext(HoverContext);
-
 	const keys = options.map((O) => O.name);
 	const columns: string[] = [];
 	const rows: string[] = [];
@@ -30,6 +30,24 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 			rows.push(keys[keys.length - n]);
 		}
 	}
+
+	const onClickCell = (cellID: string) => {
+		const inputCells = Object.keys(input);
+		const possibleCellStates = applyFilters(
+			'reactLogic.possibleCellStates',
+			2,
+			cellID
+		);
+
+		if (inputCells.includes(cellID)) {
+			setInput({
+				...input,
+				[cellID]: (input[cellID] + 1) % (possibleCellStates + 1),
+			});
+		} else {
+			setInput({ ...input, [cellID]: 1 });
+		}
+	};
 
 	return (
 		<div className="logic-puzzle-input-grid">
@@ -61,7 +79,6 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 			</div>
 
 			<div className="logic-puzzle-input-grid__cells">
-				{' '}
 				{rows.map((r, i) => (
 					<div key={i} className="logic-puzzle-input-grid__cells-row">
 						{columns.map((c, j) => {
@@ -82,23 +99,12 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 									row={rowOption}
 									column={columnOption}
 									setHover={setHover}
-									onClickCell={(cellID: string) => {
-										const inputCells = Object.keys(input);
-
-										if (inputCells.includes(cellID)) {
-											setInput({
-												...input,
-												[cellID]: (input[cellID] + 1) % 3,
-											});
-										} else {
-											setInput({ ...input, [cellID]: 1 });
-										}
-									}}
+									onClickCell={onClickCell}
 								/>
 							);
 						})}
 					</div>
-				))}{' '}
+				))}
 			</div>
 		</div>
 	);
