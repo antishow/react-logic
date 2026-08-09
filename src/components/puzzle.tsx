@@ -5,6 +5,8 @@ import { ClueList } from './clue-list.jsx';
 import { PuzzleHeader } from './puzzle-header.jsx';
 import { InputGrid } from './input-grid.jsx';
 
+import type { RenderMonitorProps } from './puzzle-monitor.jsx';
+
 export const InputContext = createContext<Record<string, number>>({});
 export const HoverContext = createContext<string[]>([]);
 
@@ -21,6 +23,7 @@ export type PuzzleProps = {
 	solution: number;
 	clues: string[];
 	options: PuzzleOption[];
+	RenderPuzzleMonitor: React.ComponentType<RenderMonitorProps>;
 };
 
 export const Puzzle = ({
@@ -30,6 +33,7 @@ export const Puzzle = ({
 	solution,
 	clues,
 	options,
+	RenderPuzzleMonitor,
 }: PuzzleProps) => {
 	const [input, setInput] = useState({});
 	const [hover, setHover] = useState([]);
@@ -41,7 +45,9 @@ export const Puzzle = ({
 					<PuzzleHeader {...{ title, description, instructions }} />
 					<ClueList {...{ clues, setHover }} />
 					<InputGrid {...{ options, setHover, setInput }} />
-					<PuzzleMonitor {...{ options }} />
+					<PuzzleMonitor
+						{...{ options, setInput, RenderMonitor: RenderPuzzleMonitor }}
+					/>
 					<CheckAnswerButton {...{ solution, options }} />
 				</div>
 			</HoverContext>

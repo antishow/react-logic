@@ -3,18 +3,20 @@ import { useContext } from 'react';
 import { normalizePuzzleInput, cyrb53 } from '../helpers.ts';
 import { InputContext } from './puzzle.tsx';
 
-type RenderMonitorProps = {
+export type RenderMonitorProps = {
 	options: PuzzleOption[];
 	input: any;
+	setInput?: Function;
 };
 
 type PuzzleMonitorProps = {
 	options: PuzzleOption[];
-	RenderMonitor: React.ComponentType<RenderMonitorProps>;
+	setInput?: Function;
+	RenderMonitor?: React.ComponentType<RenderMonitorProps>;
 };
 
 const BasicPuzzleTable = (props: RenderMonitorProps) => {
-	const { input, options } = props;
+	const { input, setInput, options } = props;
 	const normalizedInput = normalizePuzzleInput({ input, options });
 	const inputStr = cyrb53(JSON.stringify(normalizedInput));
 
@@ -49,12 +51,12 @@ const BasicPuzzleTable = (props: RenderMonitorProps) => {
 };
 
 export const PuzzleMonitor = (props: PuzzleMonitorProps) => {
-	const { options, RenderMonitor } = props;
+	const { options, setInput, RenderMonitor } = props;
 	const input = useContext(InputContext);
 
 	if (!RenderMonitor) {
 		return <BasicPuzzleTable {...{ input, options }} />;
 	}
 
-	return <RenderMonitor {...{ input, options }} />;
+	return <RenderMonitor {...{ input, setInput, options }} />;
 };
