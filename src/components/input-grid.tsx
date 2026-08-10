@@ -41,7 +41,7 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 
 		if (inputCells.includes(cellID)) {
 			const cellValue = clickEvent.shiftKey
-				? 1
+				? 0
 				: (input[cellID] + 1) % (possibleCellStates + 1);
 			setInput({
 				...input,
