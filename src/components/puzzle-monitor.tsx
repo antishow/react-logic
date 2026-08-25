@@ -33,7 +33,7 @@ const BasicPuzzleTable = (props: RenderMonitorProps) => {
 					</tr>
 				</thead>
 				<tbody>
-					{normalizedInput.map((row, i) => {
+					{normalizedInput.map((row: Record<string, number>, i: number) => {
 						return (
 							<tr key={i}>
 								{Object.keys(row).map((k, j) => (
