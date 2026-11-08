@@ -18,6 +18,8 @@ export type PuzzleOption = {
 
 export type PuzzleProps = {
 	title: string;
+	id: string;
+	savedInput: any | null;
 	description: string;
 	instructions: string;
 	solution: number;
@@ -28,6 +30,8 @@ export type PuzzleProps = {
 
 export const Puzzle = ({
 	title,
+	id,
+	savedInput,
 	description,
 	instructions,
 	solution,
@@ -35,14 +39,23 @@ export const Puzzle = ({
 	options,
 	RenderPuzzleMonitor,
 }: PuzzleProps) => {
-	const [input, setInput] = useState({});
+	const [input, _setInput] = useState(savedInput ?? {});
 	const [hover, setHover] = useState([]);
+
+	const setInput = (newInput: any) => {
+		window.localStorage.setItem(
+			`puzzle-input-(${id})`,
+			JSON.stringify(newInput)
+		);
+
+		return _setInput(newInput);
+	};
 
 	return (
 		<InputContext value={input}>
 			<HoverContext value={hover}>
 				<div className="logic-puzzle">
-					<PuzzleHeader {...{ title, description, instructions }} />
+					<PuzzleHeader {...{ title, id, description, instructions }} />
 					<ClueList {...{ clues, setHover }} />
 					<InputGrid {...{ options, setHover, setInput }} />
 					<PuzzleMonitor
