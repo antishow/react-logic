@@ -3,6 +3,12 @@
   "version": "2.0.0",
   "description": "React Component to display a classic grid-based logic puzzle",
   "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./helpers": "./src/helpers.js",
+    "./puzzle": "./src/components/puzzle.js",
+    "./style.css": "./src/style.css"
+  },
   "author": "antishow",
   "license": "ISC",
   "type": "module",
