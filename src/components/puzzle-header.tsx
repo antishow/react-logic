@@ -1,11 +1,13 @@
 type PuzzleHeaderProps = {
 	title: string;
+	id: string;
 	description: string;
 	instructions: string;
 };
 
 export const PuzzleHeader = ({
 	title,
+	id,
 	description,
 	instructions,
 }: PuzzleHeaderProps) => (
@@ -20,9 +22,18 @@ export const PuzzleHeader = ({
 			dangerouslySetInnerHTML={{ __html: description }}
 		/>
 
-		<div
-			className="logic-puzzle__instructions"
-			dangerouslySetInnerHTML={{ __html: instructions }}
-		/>
+		<dialog id={`${id}-instructions`} className="logic-puzzle__instructions">
+			<div dangerouslySetInnerHTML={{ __html: instructions }} />
+			<button
+				onClick={() => {
+					const dialog = document.getElementById(`${id}-instructions`);
+					if (!dialog) {
+						return;
+					}
+					(dialog as HTMLDialogElement).close();
+				}}>
+				Close
+			</button>
+		</dialog>
 	</div>
 );
