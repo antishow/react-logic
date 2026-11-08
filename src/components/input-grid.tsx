@@ -52,9 +52,36 @@ export const InputGrid = ({ options, setHover, setInput }: InputGridProps) => {
 		}
 	};
 
+	const handleClickClear = () => {
+		if (confirm('Are you sure? This action can not be undone!')) {
+			setInput([]);
+		}
+	};
+
+	const handleClickHelp = (target: EventTarget) => {
+		if (!target) {
+			return;
+		}
+
+		const puzzle = (target as HTMLElement).closest('.logic-puzzle');
+		if (!puzzle) {
+			return;
+		}
+
+		const instructions = puzzle.querySelector('.logic-puzzle__instructions');
+		if (!instructions) {
+			return;
+		}
+
+		(instructions as HTMLDialogElement).showModal();
+	};
+
 	return (
 		<div className="logic-puzzle-input-grid">
-			<div className="logic-puzzle-input-grid__corner"></div>
+			<div className="logic-puzzle-input-grid__corner">
+				<button onClick={(e) => handleClickHelp(e.target)}>Help</button>
+				<button onClick={() => handleClickClear()}>Clear</button>
+			</div>
 			<div className="logic-puzzle-input-grid__columns">
 				{columns.map((c, n) => (
 					<LabelGroup
