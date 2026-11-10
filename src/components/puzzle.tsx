@@ -17,9 +17,8 @@ export type PuzzleOption = {
 };
 
 export type PuzzleProps = {
-	title: string;
 	id: string;
-	savedInput: any | null;
+	title: string;
 	description: string;
 	instructions: string;
 	solution: number;
@@ -29,9 +28,8 @@ export type PuzzleProps = {
 };
 
 export const Puzzle = ({
-	title,
 	id,
-	savedInput,
+	title,
 	description,
 	instructions,
 	solution,
@@ -39,17 +37,24 @@ export const Puzzle = ({
 	options,
 	RenderPuzzleMonitor,
 }: PuzzleProps) => {
-	const [input, _setInput] = useState(savedInput ?? {});
-	const [hover, setHover] = useState([]);
+	const dataID = `puzzle-input-(${id})`;
+	const [input, _setInput] = useState(() => {
+		try {
+			const savedInputString = localStorage.getItem(dataID) ?? '{}';
+
+			return JSON.parse(savedInputString);
+		} catch {
+			return {};
+		}
+	});
 
 	const setInput = (newInput: any) => {
-		window.localStorage.setItem(
-			`puzzle-input-(${id})`,
-			JSON.stringify(newInput)
-		);
+		localStorage.setItem(dataID, JSON.stringify(newInput));
 
 		return _setInput(newInput);
 	};
+
+	const [hover, setHover] = useState([]);
 
 	return (
 		<InputContext value={input}>
