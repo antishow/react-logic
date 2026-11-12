@@ -3,7 +3,7 @@
 	"title": "Animal Badges",
 	"description": "It’s your first day on the job at the Animals and Puzzles Club, and your first assignment is making membership badges for the four newest members: Tom, Dick, Harry, and Sally. You know for sure that all four badges need to have a different Shape (Triangle, Square, Pentagon, or Hexagon), Color (Red, Green, Blue, or Black), and Animal (Bird, Cat, Dog, or Fish), but you were given a bunch of clues instead of straightforward directions. Can you figure out which Shape, Color, and Animal goes with each person’s badge?",
 	"instructions": "Click the boxes in the grid below to mark them. Clicking on an empty box will mark it as false, clicking on a false box will mark it as true, and clicking on a true box will reset it back to blank. As the rows labeled with names are filled in, the true boxes will be copied to your final answer at the bottom. To get started, the first clue says “The Cat badge is Square”, so click twice in the cell where Cat and Square intersect!",
-	"solution": 4741776578670916,
+	"solution": 677153884723632,
 	"clues": [
 		"The <em data-animal=\"Cat\">Cat</em> badge is <em data-shape=\"Square\">Square</em>",
 		"There are four different badges: a <em data-color=\"Green\">Green</em> one, a <em data-color=\"Red\">Red</em> one, one with a picture of a <em data-animal=\"Fish\">Fish</em>, and one that belongs to <em data-name=\"Harry\">Harry</em>.",
