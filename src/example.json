@@ -5,12 +5,12 @@
 	"instructions": "Click the boxes in the grid below to mark them. Clicking on an empty box will mark it as false, clicking on a false box will mark it as true, and clicking on a true box will reset it back to blank. As the rows labeled with names are filled in, the true boxes will be copied to your final answer at the bottom. To get started, the first clue says “The Cat badge is Square”, so click twice in the cell where Cat and Square intersect!",
 	"solution": 4741776578670916,
 	"clues": [
-		"The Cat badge is Square",
-		"There are four different badges: a Green one, a Red one, one with a picture of a Fish, and one that belongs to Harry.",
-		"Tom’s badge has twice as many sides as the Bird badge.",
-		"The Hexagon badge is not Green",
-		"Sally’s badge has fewer sides than the Dog badge, and more sides than the Black one.",
-		"The Dog badge is not Red"
+		"The <em data-animal=\"Cat\">Cat</em> badge is <em data-shape=\"Square\">Square</em>",
+		"There are four different badges: a <em data-color=\"Green\">Green</em> one, a <em data-color=\"Red\">Red</em> one, one with a picture of a <em data-animal=\"Fish\">Fish</em>, and one that belongs to <em data-name=\"Harry\">Harry</em>.",
+		"<em data-name=\"Tom\">Tom’s</em> badge has twice as many sides as the <em data-animal=\"Bird\">Bird</em> badge.",
+		"The <em data-shape=\"Hexagon\">Hexagon</em> badge is not <em data-color=\"Green\">Green</em>",
+		"<em data-name=\"Sally\">Sally’s</em> badge has fewer sides than the <em data-animal=\"Dog\">Dog</em> badge, and more sides than the <em data-color=\"Black\">Black</em> one.",
+		"The <em data-animal=\"Dog\">Dog</em> badge is not <em data-color=\"Red\">Red</em>"
 	],
 	"options": [
 		{
