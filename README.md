@@ -4,7 +4,7 @@ This is a ReactJS component that displays an interactive, grid-based logic puzzl
 
 ## First, a Warning
 
-This repo was really just built for personal use and has changed shape a lot over the course of time. It's poorly documented and probably full of holes or weird code that isn't The Proper React Way. I am an old web dev _(as in, a human being)_ that is using this as a way to learn Typescript and React with something besides a productivity tracker. You are welcome to clone and use it however you like, it does work, and I've pushed [a bunch of puzzles up to itch.io](https://antishow.itch.io/) with it, but you're probably going to be like _“This thing sucks!”_. Sorry! I'm sure it'll be better next time if you ever come back, I have been picking away at this thing for literally years now.
+This repo was really just built for personal use and has changed shape a lot over the course of time. It's poorly documented and probably full of holes or weird code that isn't The Proper React Way. I am an old web dev _(as in, a human being)_ that is using this as a way to learn Typescript and React with something besides a productivity tracker. You are welcome to clone and use it however you like, it does work, and I've pushed [a bunch of puzzles up to itch.io](https://antishow.itch.io/) with it, but you're probably going to be like _“This thing sucks!”_. Sorry! I'm sure it'll be better next time if you ever come back, I have been picking away at this thing for literally years now; [here's the original vanilla JS version I wrote on CodePen in Janurary 2023](https://codepen.io/antishow/pen/RwBZxGb).
 
 ## Quick Start
 
