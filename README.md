@@ -11,9 +11,9 @@ This repo was really just built for personal use and has changed shape a lot ove
 Being a text-based puzzle, it's pretty much just a lot of strings to set, so I like to use a [json file matching the shape of the PuzzleProps type](src/example.json). Import the component and the json, then pass the latter into the former. Now register a pair of event listeners on your document for `puzzle_wrong` and `puzzle_solved` and have those callbacks do whatever you want to happen when the user enters a guess.
 
 ```js
-import examplePuzzle from './example.json';
-import Puzzle from '@antishow/react-logic';
 import '@antishow/react-logic/style.css';
+import Puzzle from '@antishow/react-logic';
+import examplePuzzle from './example.json';
 
 // I dunno your app so I'm skipping steps for brevity. You get it!
 root.render(<Puzzle {...examplePuzzle} />);
@@ -31,7 +31,7 @@ document.addEventListener('puzzle_solved', () =>
 
 You'll notice that the Solution is just a number and not an object that describes the solution like one might expect. I didn't want any smarty-pants _(smarty-pantses?)_ being able to just read the solution out of the in-browser javascript, so I just don't put it in there in a human-readable format.
 
-Instead, run this locally and enter the correct solution there. If you inspect the PuzzleMonitor element using your browser tools you'll see a `data-input` attribute with the hash for that input. Just save that value!
+Instead, run this locally and enter the correct solution there. If you inspect the PuzzleMonitor element using your browser tools you'll see a `data-input` attribute with the hash for that input. Just save that value! I'm sure there's a smarter way to do this, but it's important that you actually _solve_ the puzzle yourself at least once while writing it, and this keeps me honest.
 
 ## Styling
 
@@ -79,3 +79,17 @@ Finally, the component itself will add class names to the cells depending on the
 There's an internal context variable called `hover`. Whenever the user hovers on a cell or label that is tied to a bit of data from the puzzle, this property is set to a list of all of the _key/value pairs_ represented by the thing being hovered. When all of those cells and labels are being rendered if they have a matching key/value pair, they get an extra `key-hover` css class. Or in short, when you hover over a cell in a row or column, it and all of the other cells in the same row and same column will get the hover class.
 
 But wait, there's more! You can also use an `em` tag in Clue text to apply the same key/value pair association. Same as the others, when the user hovers the em element the key-hover class is added to all corresponding cells and labels in the puzzle. For example given the clue: `The <em data-animal="Cat">Cat</em> badge is <em data-shape="Square">Square</em>`, when the User hovers over the word `Cat`, all Cat Cells and Labels in the Puzzle will get the key-hover class.
+
+## Hooks
+
+When the user makes a guess, the document will dispatch either a `puzzle_wrong` or `puzzle_solved` event. There are other, more advanced "code hooks" though, and they'll be document here someday I promise!
+
+## Writing the Puzzle
+
+I always hear that in mystery writing you're supposed to start at the thrilling conclusion and work backwards, but I think the reverse is better for logic puzzles. I like start with a setting, premise, and my list of nouns, then I just make up a few clues without any real idea of how it's going to end.
+
+Taking those starting clues, I'll try to squeeze out as many observations as possible, then just carefully add more until the puzzle is solvable _( or, if you want to make it a little easier, add one or two small clues afterward )_. More or less it's like you're making up the puzzle and solving it as you go.
+
+## Building for Itch.io
+
+Honestly this really isn't something I spend a lot of time thinking about; I just use [Vite](https://vite.dev/) set to Typescript/React. With that setup, my example code from the Quick Start above should easily drop into the main.tsx file without too many edits. Then I just run `npm run build` and the dist folder that it creates can be zipped and uploaded as a project.
