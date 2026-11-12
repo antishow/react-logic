@@ -4,14 +4,14 @@
   --puzzle--mark-size: 14px;
   --puzzle--void-size: 100px;
   --puzzle--grid-size: 20px;
-  --puzzle--padding-size: calc(0.5 * (var(--puzzle--grid-size) - var(--puzzle--font-size)));
-  --puzzle--text-color: #000;
-  --puzzle--border-color: #000;
+  --puzzle--padding-size: 6px; /* grid - font (probably overkill, but removed calc here to speed up) */
   --puzzle--border-width: 1px;
+  --puzzle--border-color: #000;
+  --puzzle--text-color: #000;
   --puzzle--background-color: #fff;
   --puzzle--hover-color: #eee;
   --puzzle--true-color: #070;
-  --puzzle--false-color: #f33;  
+  --puzzle--false-color: #f33;
 }
 
 .logic-puzzle * {
