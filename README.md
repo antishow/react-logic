@@ -82,7 +82,7 @@ But wait, there's more! You can also use an `em` tag in Clue text to apply the s
 
 ## Hooks
 
-When the user makes a guess, the document will dispatch either a `puzzle_wrong` or `puzzle_solved` event. There are other, more advanced "code hooks" though, and they'll be document here someday I promise!
+When the user makes a guess, the document will dispatch either a `puzzle_wrong` or `puzzle_solved` event. There are other, more advanced "code hooks" though, and they'll be documented here someday I promise!
 
 ## Writing the Puzzle
 
@@ -93,3 +93,84 @@ Taking those starting clues, I'll try to squeeze out as many observations as pos
 ## Building for Itch.io
 
 Honestly this really isn't something I spend a lot of time thinking about; I just use [Vite](https://vite.dev/) set to Typescript/React. With that setup, my example code from the Quick Start above should easily drop into the main.tsx file without too many edits. Then I just run `npm run build` and the dist folder that it creates can be zipped and uploaded as a project.
+
+## The Promised Advanced Hooks
+
+You'll need to add another package, `@antishow/hooks` to the project and then import `addFilter` from that. There are no docs there, sorry, but it's basically the same idea as the one in [@wordpress/hooks](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-hooks/) -- give those docs a look to learn more!
+
+Or the short version is, use `addFilter` to register callback functions which take a value as input ( along with some other optional arguments ), you can mess with that value ( or not ) and then return it!
+
+### isImplicitlyFalse
+
+Say you're making a puzzle and you want to customize the rules that determine if a cell should be flagged as implicitlyFalse. For a simple example, let's just say we _never_ want it to happen. No freebies, the user only the gets the marks they enter!
+
+We'll use applyFilters to add a callback to `reactLogic/isImplicitlyFalse`, and then that function will just return false, meaning "No, this cell is NOT implicitly false".
+
+```js
+addFilter(
+	'reactLogic.isImplicitlyFalse',
+	'isImplicitlyFalse.nope',
+	(isImplicitlyFalse: boolean, cellProps: any): boolean => {
+		return false
+	},
+	10
+);
+```
+
+Or, way more complicated, you want to setup a rule so that a cell isn't flagged as implicitly false unless it's in an 'animal' cell and there are TWO other cells marked true in the same row.
+
+```js
+addFilter(
+	'reactLogic.isImplicitlyFalse',
+	'isImplicitlyFalse.ifThereAreTwoOthers', // Give your filter a unique name
+	( isImplicitlyFalse: boolean, cellProps: any ): boolean => {
+		const {
+			input, // an array of cell keys and their states
+			rowName, // the name of the row the cell belongs to
+			columnName, // the name of the column the cell belongs to
+			rowValue, // the value this cell represents in the row
+			columnValue, // the value this cell represents in the column
+			trueNeighbors = { row: [], column: [] }, // arrays of other cells in
+			                                         // the same row/column that
+													 // are marked as true
+		} = cellProps;
+
+		const names = [ rowName, columnName ];
+
+		// Not an animal cell, just return whatever it would have normally been.
+		if ( ! names.includes( 'animal' ) ) {
+			return isImplicitlyFalse;
+		}
+
+		// Return true if there are at least two other cells marked true in this row
+		return trueNeighbors.row.length >= 2;
+	},
+	10 // The priority to run at in case there are other filters on the same callback
+);
+```
+
+### possibleCellStates
+
+Usually there are only 3 possible cell states: Empty, False, or True, but this filter can be used to change that number to something else.
+
+( I could probably get rid of this and just derive it from inputStatusOptions instead, I just need to make a future update for that at some point )
+
+### inputStatusOptions
+
+This filter can be used to change the list of possible states that the cell will cycle through each time it's clicked. This, along with the other two filters: isImplicitlyFalse and possibleCellStates, can be used to make logic puzzles where cells have multiple truthy values or numeric values.
+
+### normalizePuzzleInput
+
+Before the object representing the input grid is hashed to a number for comparison against the solution, that array is passed through this filter. For example, imagine you're making a "murder mystery" puzzle where the user has to pick the guilty party from a menu in addition to solving the rest of it.
+
+```js
+addFilter(
+	'reactLogic.normalizePuzzleInput',
+	'normalizePuzzleInput.includingWhodunit',
+	(normalizedInput, input, options) => {
+		const whodunit = document.getElementById('select-whodunit');
+		return Object.assign({}, normalizedInput, { whodunit });
+	},
+	10
+);
+```
